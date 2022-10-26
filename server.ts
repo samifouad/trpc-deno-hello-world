@@ -4,25 +4,29 @@ import * as trpcExpress from "https://esm.sh/@trpc/server@9.27.2/adapters/expres
 //import { opineCors } from "https://deno.land/x/cors@v1.2.2/mod.ts";
 
 const app = opine(); // opine is express ported to deno
+const port = 5005;
 
 // setup tRPC router
 const appRouter = trpc.router().query("hw", {
   resolve() {
-    const data = { hello: 'world' }
+    const data = { hello: "world" };
     return data;
   },
 });
 
 // apply tRPC router as a middleware
-app.use("/trpc",
+app.use(
+  "/trpc",
   trpcExpress.createExpressMiddleware({
     router: appRouter,
     createContext: () => null,
-  })
+  }),
 );
 
 //app.use(opineCors()); // uncomment to use cors
 
-app.listen(5005); // start server
+app.listen(port); // start server
+
+console.log(`Opine started on port: ${port}`);
 
 export type AppRouter = typeof appRouter; // tRPC type-only export
