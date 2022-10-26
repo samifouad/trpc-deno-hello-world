@@ -1,0 +1,6 @@
+{
+    "tasks": {
+        "start-client": "deno run --allow-net client.ts",
+        "start-server": "deno run --allow-env --allow-read --allow-net server.ts"
+    }
+}
