@@ -1,13 +1,9 @@
-import { opine } from "https://deno.land/x/opine@2.3.3/mod.ts";
-// TODO: Update imports to stable 10.0.0 when ready
-import {
-  inferAsyncReturnType,
-  initTRPC,
-} from "https://esm.sh/@trpc/server@10.0.0-proxy-beta.26";
-import * as trpcExpress from "https://esm.sh/@trpc/server@10.0.0-proxy-beta.26/adapters/express";
-// This zod import is for request validation
-import { z } from "https://deno.land/x/zod@v3.19.1/mod.ts";
-//import { opineCors } from "https://deno.land/x/cors@v1.2.2/mod.ts";
+import { opine } from "opine";
+// import { opineCors } from "cors";
+// TODO: Update imports in importMap.json to stable 10.0.0 when ready
+import { inferAsyncReturnType, initTRPC } from "@trpc/server";
+import * as trpcExpress from "@trpc/server/adapters/express";
+import { z } from "zod";
 
 /**
  * TRPC V10 Docs for Express integration:
@@ -25,6 +21,7 @@ const t = initTRPC.context<Context>().create();
 
 const appRouter = t.router({
   hello: t.procedure
+    // This z.string() is a zod validator, see https://trpc.io/docs/v10/quickstart#add-a-query-procedure
     .input(z.string())
     .query((req) => {
       return `Hello ${req.input}`;
@@ -44,8 +41,6 @@ const port = 5005;
 // apply tRPC router as a middleware
 app.use(
   "/trpc",
-  // @ts-expect-error Something is wrong with the typing here, prob. inside the createExpressMiddleware function,
-  // but it works when running `deno task server`
   trpcExpress.createExpressMiddleware({
     router: appRouter,
     createContext,

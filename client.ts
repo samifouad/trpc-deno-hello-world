@@ -1,8 +1,5 @@
 import type { AppRouter } from "./server.ts";
-import {
-  createTRPCProxyClient,
-  httpBatchLink,
-} from "https://esm.sh/@trpc/client@10.0.0-proxy-beta.26";
+import { createTRPCProxyClient, httpBatchLink } from "@trpc/client";
 
 const client = createTRPCProxyClient<AppRouter>({
   links: [

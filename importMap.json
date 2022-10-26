@@ -1,0 +1,12 @@
+{
+  "imports": {
+    "@/": "./",
+    "zod": "https://deno.land/x/zod@v3.19.1/mod.ts",
+    "opine": "https://deno.land/x/opine@2.3.3/mod.ts",
+    "cors": "https://deno.land/x/cors@v1.2.2/mod.ts",
+    "@trpc/server": "https://esm.sh/*@trpc/server@10.0.0-proxy-beta.26",
+    "@trpc/server/": "https://esm.sh/*@trpc/server@10.0.0-proxy-beta.26/",
+    "@trpc/client": "https://esm.sh/*@trpc/client@10.0.0-proxy-beta.26",
+    "@trpc/client/": "https://esm.sh/@trpc/client@10.0.0-proxy-beta.26/"
+  }
+}
